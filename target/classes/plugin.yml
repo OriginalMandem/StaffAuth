@@ -1,0 +1,13 @@
+name: Staffauth
+description: A simple plugin for verifying a player's identity
+version: 0.5
+main: originalalex.github.io.Plugin
+
+commands:
+  login:
+    description: Login to your account
+    permission: staffauth.auth
+  register:
+    description: Register an email
+    permission: staffauth.auth
+
