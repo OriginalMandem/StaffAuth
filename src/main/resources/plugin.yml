@@ -10,4 +10,14 @@ commands:
   register:
     description: Register an email
     permission: staffauth.auth
+  changeemail:
+    description: Change login email of other players
+    permission: staffauth.changeemail
+    aliases: [setemail]
+
+permissions:
+  staffauth.auth:
+    description: Requires the user to login to their account with a given email before being able to interact with the server
+  staffauth.changeemail:
+    description: Allows the user to change the login email of themselves or others.
 
