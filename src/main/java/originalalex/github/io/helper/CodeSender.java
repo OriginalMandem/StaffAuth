@@ -44,8 +44,6 @@ public class CodeSender {
 
             Transport.send(message);
 
-            System.out.println("Done");
-
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

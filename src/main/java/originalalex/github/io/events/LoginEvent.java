@@ -8,10 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import originalalex.github.io.helper.CodeGenerator;
 import originalalex.github.io.helper.CodeSender;
@@ -71,7 +68,7 @@ public class LoginEvent implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         if (unvalidated.contains(e.getPlayer().getUniqueId())) {
-            e.setCancelled(true);
+            e.setTo(e.getFrom());
         }
     }
 
@@ -99,6 +96,17 @@ public class LoginEvent implements Listener {
         } else if (e.getEntity() instanceof Player) {
             Player attacked = (Player) e.getDamager();
             if (unvalidated.contains(attacked.getUniqueId())) {
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onCommandSend(PlayerCommandPreprocessEvent e) {
+        if (unvalidated.contains(e.getPlayer().getUniqueId())) {
+            String cmd = e.getMessage();
+            String[] args = cmd.split(" ");
+            if (!args[0].equalsIgnoreCase("login")) {
                 e.setCancelled(true);
             }
         }
